@@ -3,18 +3,20 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+from telegram_bot import TelegramBot
+#from mongodb import MongoDB
 chrome_driver = webdriver.Chrome()
 
-# bot = TelegramBot()
-# db = Mongo()
+bot = TelegramBot()
+#db = MongoDB()
 
 
 chrome_driver.get("https://www.wikipedia.org/")
 print(chrome_driver.title)
 
 topics = [
-    "Alhambra",
-    "Generalife",
+    "Gourmet Food Service",
+    "General Mortors",
     "gonzalez suarez"
 ]
 
@@ -26,13 +28,10 @@ for t in topics:
 
     content = chrome_driver.find_element(By.ID, "mw-content-text")
     print(content.text)
-
-    # enviar por telegram
-    # bot.send(content.text, chat_id)
-    # db.insert_wikipedia_text({
-    #   "topic": content.text
-    # }
-
+    text = content.text
+    text = text[:4000]
+    bot.send_tg_message(text)
+    #db.insert_wikipedia_text(title=t, text=text)
     time.sleep(2)
     chrome_driver.get("https://www.wikipedia.org/")
 
