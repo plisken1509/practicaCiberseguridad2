@@ -16,7 +16,7 @@ print(chrome_driver.title)
 
 topics = [
     "Nono",
-    "General Motors",
+    "ILS",
     "Guayllabamba"
 ]
 
